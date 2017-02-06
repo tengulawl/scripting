@@ -15,17 +15,17 @@ public Plugin myinfo = {
 };
 
 bool g_lateLoaded;
-int g_skyFrame[MAXPLAYERS+1];
-int g_skyStep[MAXPLAYERS+1];
-float g_skyVel[MAXPLAYERS+1][3];
-float g_fallSpeed[MAXPLAYERS+1];
-int g_boostStep[MAXPLAYERS+1];
-int g_boostEnt[MAXPLAYERS+1];
-float g_boostVel[MAXPLAYERS+1][3];
-float g_boostTime[MAXPLAYERS+1];
-float g_playerVel[MAXPLAYERS+1][3];
-int g_playerFlags[MAXPLAYERS+1];
-bool g_groundBoost[MAXPLAYERS+1];
+int g_skyFrame[MAX_PLAYERS];
+int g_skyStep[MAX_PLAYERS];
+float g_skyVel[MAX_PLAYERS][3];
+float g_fallSpeed[MAX_PLAYERS];
+int g_boostStep[MAX_PLAYERS];
+int g_boostEnt[MAX_PLAYERS];
+float g_boostVel[MAX_PLAYERS][3];
+float g_boostTime[MAX_PLAYERS];
+float g_playerVel[MAX_PLAYERS][3];
+int g_playerFlags[MAX_PLAYERS];
+bool g_groundBoost[MAX_PLAYERS];
 bool g_bouncedOff[2048];
 
 public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max) {
