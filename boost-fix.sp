@@ -180,9 +180,7 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 		} else if (g_boostStep[client] == 3) {
 			GetAbsVelocity(client, velocity);
 			
-			SetRandomSeed(seed);
-			
-			if (g_groundBoost[client] && !GetRandomInt(0, 3)) {
+			if (g_groundBoost[client]) {
 				velocity[0] += g_boostVel[client][0];
 				velocity[1] += g_boostVel[client][1];
 				velocity[2] += g_boostVel[client][2];
