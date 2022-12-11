@@ -33,9 +33,9 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 }
 
 public void OnMapStart() {
-	if (g_lateLoaded) {
-		for (int i = 1; i <= MaxClients; i++) {
-			if (IsClientInGame(i)) {
+	if (g_lateLoaded == true) {
+		for (int i = 0; i <= MaxClients; ++i) {
+			if (IsClientInGame(i) == true) {
 				OnClientPutInServer(i);
 			}
 		}
@@ -206,12 +206,12 @@ public void OnEntityCreated(int entity, const char[] classname) {
 	}
 }
 
-public Action Projectile_StartTouch(int entity, int client) {
+Action Projectile_StartTouch(int entity, int client) {
 	if (!IsValidClient(client, true)) {
 		return Plugin_Continue;
 	}
 
-	CreateTimer(0.25, Timer_RemoveEntity, EntIndexToEntRef(entity), TIMER_FLAG_NO_MAPCHANGE);
+	//CreateTimer(0.25, Timer_RemoveEntity, EntIndexToEntRef(entity), TIMER_FLAG_NO_MAPCHANGE);
 
 	if (g_boostStep[client] || g_playerFlags[client] & FL_ONGROUND) {
 		return Plugin_Continue;
@@ -228,28 +228,29 @@ public Action Projectile_StartTouch(int entity, int client) {
 
 	float delta = clientOrigin[2] - entityOrigin[2] - entityMaxs[2];
 
-	if (delta > 0.0 && delta < 2.0) {
+	if (0.0 < delta < 2.0) {
 		g_boostStep[client] = 1;
 		g_boostEnt[client] = EntIndexToEntRef(entity);
 		GetAbsVelocity(entity, g_boostVel[client]);
 		GetAbsVelocity(client, g_playerVel[client]);
 		g_groundBoost[client] = g_bouncedOff[entity];
 		g_boostTime[client] = GetGameTime();
+		SetEntProp(entity, Prop_Send, "m_nSolidType", 0);
 	}
 
 	return Plugin_Continue;
 }
 
-public Action Projectile_EndTouch(int entity, int other) {
+Action Projectile_EndTouch(int entity, int other) {
 	if (!other) {
 		g_bouncedOff[entity] = true;
 	}
 }
 
-public Action Timer_RemoveEntity(Handle timer, any entref) {
+/*Action Timer_RemoveEntity(Handle timer, any entref) {
 	int entity = EntRefToEntIndex(entref);
 
 	if (entity != INVALID_ENT_REFERENCE) {
 		AcceptEntityInput(entity, "Kill");
 	}
-}
+}*/
