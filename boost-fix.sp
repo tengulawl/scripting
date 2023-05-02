@@ -72,11 +72,11 @@ public Action Client_StartTouch(int client, int other) {
 
 	float delta = otherOrigin[2] - clientOrigin[2] - clientMaxs[2];
 
-	if (delta > 0.0 && delta < 2.0) {
+	if (0.0 < delta < 2.0) {
 		float velocity[3];
 		GetAbsVelocity(client, velocity);
 
-		if (velocity[2] > 0.0 && velocity[2] < 300.0 && !(GetClientButtons(other) & IN_DUCK)) {
+		if (0.0 < velocity[2] < 300.0 && !(GetClientButtons(other) & IN_DUCK)) {
 			g_skyFrame[other] = 1;
 			g_skyStep[other] = 1;
 			g_skyVel[other] = velocity;
