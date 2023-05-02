@@ -34,7 +34,7 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 
 public void OnMapStart() {
 	if (g_lateLoaded == true) {
-		for (int i = 0; i <= MaxClients; ++i) {
+		for (int i = 1; i <= MaxClients; i++) {
 			if (IsClientInGame(i) == true) {
 				OnClientPutInServer(i);
 			}
